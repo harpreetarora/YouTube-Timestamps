@@ -32,9 +32,11 @@ const MockVulnerableComponent = () => {
 
   // Mock vulnerability 3: Sensitive information in debug mode
   useEffect(() => {
-    if (debugMode) {
+    if (debugMode && process.env.NODE_ENV !== 'production') {
       // This simulates exposing sensitive information in debug mode
-      console.log('DEBUG MODE: Mock API Key: test-api-key-12345');
+      // eslint-disable-next-line no-console
+      console.log('DEBUG MODE: Mock API Key: TEST-API-KEY-EXAMPLE-12345'); // gitleaks:allow
+      // eslint-disable-next-line no-console
       console.log('DEBUG MODE: Mock User Session:', { userId: 'test-user', role: 'admin' });
     }
   }, [debugMode]);
