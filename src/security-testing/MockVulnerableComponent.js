@@ -9,6 +9,18 @@ const MockVulnerableComponent = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [debugMode, setDebugMode] = useState(false);
 
+  // Hard kill-switch: only render when explicitly enabled
+  const sandboxEnabled =
+    (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_ENABLE_SECURITY_SANDBOX) ||
+    process.env.REACT_APP_ENABLE_SECURITY_SANDBOX ||
+    process.env.NEXT_PUBLIC_ENABLE_SECURITY_SANDBOX;
+  if (process.env.NODE_ENV === 'production' && sandboxEnabled !== 'true') {
+    console.warn('Security sandbox disabled. Not rendering.'); // eslint-disable-line no-console
+    return null;
+  }
+
+  // …rest of component logic…
+};
   // Mock vulnerability 1: XSS via dangerouslySetInnerHTML
   // This simulates a common XSS vulnerability where user input is rendered without sanitization
   const renderUserContent = (content) => {
