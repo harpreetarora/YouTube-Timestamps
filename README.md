@@ -81,6 +81,18 @@ Make sure to never commit your `.env`—it’s included in `.gitignore` by defau
 
 ---
 
+## ⚠️ Test-Only Mock Vulnerability
+
+This project includes an optional, clearly-marked component for security testing and education.
+
+- Set `REACT_APP_ENABLE_MOCK_VULN=true` in `.env` to enable a mock XSS demo that intentionally renders unsanitized HTML using `dangerouslySetInnerHTML`.
+- The component is located at `src/debug/MockVulnerabilityDemo.js` and is rendered in `App.js` only when the flag is set.
+- Do not enable this in production. It exists solely to validate scanners and train developers.
+
+See `.env.example` for configuration.
+
+---
+
 # 📚 Google Doc Resources
 
 | Resource                               | Description                           | Link                                                                                                                                           |
