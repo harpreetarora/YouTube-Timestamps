@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet';
 import LandingPage from './unAuth/LandingPage';
 import './App.css';
 import './firebase';
+import MockVulnerabilityDemo from './debug/MockVulnerabilityDemo';
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
         />
       </Helmet>
       <LandingPage />
+      {process.env.REACT_APP_ENABLE_MOCK_VULN === 'true' && (
+        <MockVulnerabilityDemo />
+      )}
     </div>
   );
 }
